@@ -8,7 +8,7 @@ set(CMAKE_CXX_STDLIB_MODULES_JSON
 set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD
     d0edc3af-4c50-42ea-a356-e2862fe7a444)
 
-project("aisd-labs")
+project("aisd-labs-2")
 
 set(CMAKE_OSX_SYSROOT
     "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk")
@@ -41,4 +41,7 @@ target_compile_features("${PROJECT_NAME}" PUBLIC cxx_std_23)
 target_sources("${PROJECT_NAME}"
     PUBLIC
         FILE_SET CXX_MODULES FILES
+        linked_list.cppm
+        node.cppm
+        polynomial.cppm
 )
