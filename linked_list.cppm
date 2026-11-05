@@ -23,6 +23,23 @@ public:
         }
     }
 
+    LinkedList(int count, int min_value, int max_value, unsigned int seed)
+        : _head(nullptr), _tail(nullptr), _size(0)
+    {
+        if (count < 0 || min_value > max_value)
+        {
+            throw std::invalid_argument("Invalid random list parameters");
+        }
+
+        std::mt19937 generator(seed);
+        std::uniform_int_distribution<int> distribution(min_value, max_value);
+
+        for (int i = 0; i < count; ++i)
+        {
+            push_tail(distribution(generator));
+        }
+    }
+
     int size() const
     {
         return _size;
@@ -172,10 +189,16 @@ public:
     void delete_node(const T &value)
     {
         Node<T> *cur = _head;
+        bool found = false;
+
         while (cur)
         {
+            Node<T> *next = cur->_next;
+
             if (cur->_value == value)
             {
+                found = true;
+
                 if (cur == _head)
                 {
                     pop_heads();
@@ -192,11 +215,15 @@ public:
                     delete cur;
                     --_size;
                 }
-                return;
             }
-            cur = cur->_next;
+
+            cur = next;
         }
-        throw std::out_of_range("Element not found");
+
+        if (!found)
+        {
+            throw std::out_of_range("Element not found");
+        }
     }
 
     T &operator[](int index)
@@ -228,6 +255,19 @@ public:
         return cur->_value;
     }
 };
+
+export template <typename T>
+void reverse_list(LinkedList<T> &list)
+{
+    LinkedList<T> reversed;
+
+    for (int i = list.size() - 1; i >= 0; --i)
+    {
+        reversed.push_tail(list[i]);
+    }
+
+    list = reversed;
+}
 
 export template <typename T>
 std::ostream &operator<<(std::ostream &out, const LinkedList<T> &list)

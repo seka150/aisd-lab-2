@@ -6,7 +6,7 @@ set(CMAKE_CXX_STDLIB_MODULES_JSON
     "/opt/homebrew/opt/llvm/lib/c++/libc++.modules.json")
 
 set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD
-    d0edc3af-4c50-42ea-a356-e2862fe7a444)
+    f35a9ac6-8463-4d38-8eec-5d6008153e7d)
 
 project("aisd-labs-2")
 
@@ -43,5 +43,4 @@ target_sources("${PROJECT_NAME}"
         FILE_SET CXX_MODULES FILES
         linked_list.cppm
         node.cppm
-        polynomial.cppm
 )
